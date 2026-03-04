@@ -3,6 +3,10 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 const QuizContext = createContext();
 
 const SECS_PER_QUESTION = 30;
+const API_BASE_URL = process.env.REACT_APP_API_URL?.replace(/\/$/, "");
+const QUESTIONS_URL = API_BASE_URL
+  ? `${API_BASE_URL}/questions`
+  : `${process.env.PUBLIC_URL}/questions.json`;
 
 const initialState = {
   questions: [],
@@ -80,10 +84,10 @@ function QuizProvider({ children }) {
   );
 
   useEffect(() => {
-    fetch("http://localhost:8000/questions")
+    fetch(QUESTIONS_URL)
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
-      .catch((err) => dispatch({ type: "dataFailed" }));
+      .catch(() => dispatch({ type: "dataFailed" }));
   }, []);
 
   return (
