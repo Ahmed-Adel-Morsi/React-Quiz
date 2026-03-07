@@ -9,7 +9,7 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
     "gh-pages": "^6.3.0",
-    "json-server": "^1.0.0-beta.5",
+    "json-server": "^0.17.4",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-scripts": "5.0.1",
@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch data/questions.json --port 8000",
+    "server": "json-server --watch data/questions.json --port 8000 --delay 1500",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
