@@ -3,10 +3,7 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 const QuizContext = createContext();
 
 const SECS_PER_QUESTION = 30;
-const API_BASE_URL = process.env.REACT_APP_API_URL?.replace(/\/$/, "");
-const QUESTIONS_URL = API_BASE_URL
-  ? `${API_BASE_URL}/questions`
-  : `${process.env.PUBLIC_URL}/questions.json`;
+const QUESTIONS_URL = `${process.env.PUBLIC_URL}/questions.json`;
 
 const initialState = {
   questions: [],
