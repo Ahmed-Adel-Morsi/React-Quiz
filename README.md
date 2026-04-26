@@ -1,74 +1,69 @@
-# React Quiz App
+# 🧠 The React Quiz
 
-A clean, interactive React quiz application that tests React fundamentals through multiple-choice questions, live scoring, and a countdown timer.
+A polished React quiz application that tests React fundamentals through timed multiple-choice questions, live scoring, and instant feedback.  
+Designed as a practical state-management project using Context API + `useReducer`.
 
-## Live Demo
+## 🌐 Live Demo
 
-- GitHub Pages: https://ahmed-adel-morsi.github.io/React-Quiz
+- [Try it on GitHub Pages](https://ahmed-adel-morsi.github.io/React-Quiz)
 
-## Features
+## ✨ Features
 
-- Works in two modes: local API (`json-server`) or static hosted data
-- Multi-state quiz flow: loading → ready → active → finished
-- Per-question scoring with total/max points tracking
-- Countdown timer (`30s` per question)
-- Instant answer feedback (correct/wrong highlighting)
-- High score persistence during the active app session
-- Restart flow without refetching question data
+- ⚡ Smooth multi-step quiz flow: `loading` → `ready` → `active` → `finished`
+- 🧮 Dynamic score calculation with max-points tracking
+- ⏱️ Built-in countdown timer (`30s` per question)
+- ✅ Instant answer validation with correct/wrong highlighting
+- 🏆 Session high-score tracking and quick restart
+- 🔌 Flexible data source: local API (`json-server`) or static JSON fallback
+- 💥 Friendly error state when data fetching fails
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- React 19
-- Context API + `useReducer` for global state management
-- Create React App (`react-scripts`)
-- `json-server` as a lightweight mock backend
-- Environment-based API configuration (`REACT_APP_API_URL`)
-- GitHub Pages (`gh-pages`) for deployment
+- **Frontend:** React 19, React DOM
+- **State Management:** Context API + `useReducer`
+- **Tooling:** Create React App (`react-scripts`)
+- **Mock Backend:** `json-server`
+- **Testing:** React Testing Library + Jest DOM
+- **Deployment:** GitHub Pages (`gh-pages`)
 
-## Project Structure
+## 🧩 Architecture Highlights
+
+- Centralized quiz logic lives in `src/context/QuizContext.jsx`
+- Global reducer handles all transitions (`start`, `newAnswer`, `nextQuestion`, `finish`, `restart`, `tick`)
+- Components remain focused and reusable (`Progress`, `Question`, `Options`, `Timer`, `FinishScreen`, etc.)
+- Data endpoint is environment-aware:
+  - Uses `REACT_APP_API_URL/questions` when defined
+  - Falls back to `public/questions.json` for hosted/static usage
+
+## 📁 Project Structure
 
 ```text
 src/
-	components/
-		App.js
-		Header.js
-		Main.js
-		StartScreen.js
-		Question.js
-		Options.js
-		Progress.js
-		NextButton.js
-		Timer.js
-		Footer.js
-		FinishScreen.js
-		Loader.js
-		Error.js
-		DateCounter.js
-	context/
-		QuizContext.jsx
-	index.js
-	index.css
+  components/
+    App.js
+    Header.js
+    Main.js
+    StartScreen.js
+    Question.js
+    Options.js
+    Progress.js
+    NextButton.js
+    Timer.js
+    Footer.js
+    FinishScreen.js
+    Loader.js
+    Error.js
+    DateCounter.js
+  context/
+    QuizContext.jsx
+  index.js
+  index.css
 
-data/
-	questions.json
+public/
+  questions.json
 ```
 
-## State Model
-
-The global quiz state is managed in `QuizContext` using `useReducer`:
-
-- `loading`: waiting for questions API
-- `ready`: questions loaded, waiting to start
-- `active`: quiz in progress
-- `finished`: completed or timed out
-
-Core reducer actions include:
-
-- `dataReceived`, `dataFailed`
-- `start`, `newAnswer`, `nextQuestion`
-- `finish`, `restart`, `tick`
-
-## Getting Started
+## 🚀 Getting Started
 
 ### 1) Install dependencies
 
@@ -76,69 +71,59 @@ Core reducer actions include:
 npm install
 ```
 
-### 2) Choose your run mode
+### 2) Run the app
 
-#### Option A (recommended for fastest start): Use built-in static data
-
-- Just run the app:
+#### Option A (quickest): Static data mode
 
 ```bash
 npm start
 ```
 
-The app loads quiz data from `public/questions.json`.
+The app will load questions from `public/questions.json`.
 
-#### Option B: Use `json-server` with `.env`
+#### Option B: Local API mode with `json-server`
 
-1. Create `.env.local` in the project root:
+1. Create a `.env.local` file in the root:
 
 ```bash
 REACT_APP_API_URL=http://localhost:8000
 ```
 
-2. Start the API server:
+2. Start mock API:
 
 ```bash
 npm run server
 ```
 
-3. Start the app:
+3. Start frontend:
 
 ```bash
 npm start
 ```
 
-The app will now fetch from `http://localhost:8000/questions`.
+Now the app fetches from `http://localhost:8000/questions`.
 
-### 3) Live demo (no setup)
+## 📜 Available Scripts
 
-- Open: https://ahmed-adel-morsi.github.io/React-Quiz
+- `npm start` — run app in development mode
+- `npm run server` — run `json-server` on port `8000`
+- `npm test` — run test runner
+- `npm run build` — create production build
+- `npm run deploy` — deploy `build/` to GitHub Pages
 
-Use this if you just want to try the app immediately.
+## 🚢 Deployment
 
-## Available Scripts
-
-- `npm start` — runs the app in development mode
-- `npm run server` — starts `json-server` on port `8000`
-- `npm test` — runs tests in watch mode
-- `npm run build` — creates production build
-- `npm run deploy` — deploys `build/` to GitHub Pages
-
-## Deployment
-
-This project is configured for GitHub Pages:
+Deployment is preconfigured for GitHub Pages:
 
 - `homepage` is set in `package.json`
-- `predeploy` runs the production build
-- `deploy` publishes the `build` directory using `gh-pages`
+- `predeploy` builds the app
+- `deploy` publishes the `build/` folder via `gh-pages`
 
-## Notes
+## 🧪 Quiz Dataset
 
-- `build/` contains generated production assets and should not be edited manually.
-- Data source fallback for hosted builds is `public/questions.json`.
-- For local API mode, data is served from `data/questions.json` via `json-server`.
+The included dataset currently has **15 React-focused questions** with weighted scoring to better reflect question difficulty.
 
-## Credits
+## 🙌 Credits
 
-- Built as part of **Jonas Schmedtmann’s React course** learning path.
-- UI loader animation credit is retained in code comments (`src/index.css`).
+- Built as part of the React learning journey from **Jonas Schmedtmann’s course**
+- Loader animation credit is retained in `src/index.css`
