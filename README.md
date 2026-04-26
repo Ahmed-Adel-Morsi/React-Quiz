@@ -31,9 +31,9 @@ Designed as a practical state-management project using Context API + `useReducer
 - Centralized quiz logic lives in `src/context/QuizContext.jsx`
 - Global reducer handles all transitions (`start`, `newAnswer`, `nextQuestion`, `finish`, `restart`, `tick`)
 - Components remain focused and reusable (`Progress`, `Question`, `Options`, `Timer`, `FinishScreen`, etc.)
-- Data endpoint is environment-aware:
-  - Uses `REACT_APP_API_URL/questions` when defined
-  - Falls back to `public/questions.json` for hosted/static usage
+- Questions loaded from `{PUBLIC_URL}/questions.json`:
+  - In development: fetches from `/questions.json` (served from `public/` folder)
+  - In production: fetches from the GitHub Pages URL
 
 ## 📁 Project Structure
 
@@ -73,35 +73,35 @@ npm install
 
 ### 2) Run the app
 
-#### Option A (quickest): Static data mode
+The app loads questions from `{PUBLIC_URL}/questions.json`. In development mode, this resolves to `/questions.json`, which is served from the `public/` folder.
 
 ```bash
 npm start
 ```
 
-The app will load questions from `public/questions.json`.
+#### (Optional) Run with local `json-server` for API testing
 
-#### Option B: Local API mode with `json-server`
+If you want to test with a running API server instead of static JSON:
 
-1. Create a `.env.local` file in the root:
+1. Update `src/context/QuizContext.jsx` to use the local API URL:
 
-```bash
-REACT_APP_API_URL=http://localhost:8000
+```jsx
+const QUESTIONS_URL = `http://localhost:8000/questions`;
 ```
 
-2. Start mock API:
+2. Start the mock API server:
 
 ```bash
 npm run server
 ```
 
-3. Start frontend:
+3. In another terminal, start the React app:
 
 ```bash
 npm start
 ```
 
-Now the app fetches from `http://localhost:8000/questions`.
+The app will now fetch from `http://localhost:8000/questions`.
 
 ## 📜 Available Scripts
 
